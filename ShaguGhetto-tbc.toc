@@ -1,0 +1,7 @@
+## Interface: 20400
+## Title: |cff33ffccShagu|cffffffffGhetto
+## Author: Shagu
+## Notes: Monitor chat channels and invite people asking for ghetto
+## Version: 1.0
+## SavedVariables: ShaguGhetto_config
+ShaguGhetto.lua

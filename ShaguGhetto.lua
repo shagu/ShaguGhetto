@@ -9,7 +9,11 @@ f.SendInvite = function(self, name)
 
   -- announce name! (max every 5 seconds)
   if not self.lastcall or GetTime() - self.lastcall > 5 then
-    local channel = event == "CHAT_MSG_CHANNEL" and "CHANNEL" or "SAY"
+    local channel = event == "CHAT_MSG_CHANNEL" and "CHANNEL"
+    channel = channel or event == "CHAT_MSG_GUILD" and "GUILD"
+    channel = channel or event == "CHAT_MSG_YELL" and "YELL"
+    channel = channel or "SAY"
+
     if player == "Ghettomann" then SendChatMessage(player .. "!", channel, nil, GetChannelName("World")) end
     self.lastcall = GetTime()
   end

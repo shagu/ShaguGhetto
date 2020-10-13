@@ -1,6 +1,15 @@
 local name, text
 local player = UnitName("player")
-local f = CreateFrame("Frame", "ShaguGhetto", UIParent)
+local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
+
+f:SetScript("OnShow", function()
+  local name = UnitName("mouseover")
+  if name and ShaguGhetto_config[name] then
+    GameTooltip:AddLine("|cff33ffccShagu|cffffffffGhetto:|cffaaaaaa " .. ShaguGhetto_config[name])
+    GameTooltip:Show()
+  end
+end)
+
 f.SendInvite = function(self, name)
   if not name then return end
 

@@ -1,6 +1,15 @@
 local name, text
 local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
+local enabled = true
+
+SLASH_GHETTO1 = "/ghetto"
+function SlashCmdList.GHETTO(msg, editbox)
+  DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccShagu|cffffffffGhetto: " .. (enabled and "|cffffaaaaDisabled" or "|cffaaffaaEnabled"))
+  enabled = not enabled
+end
+
+GHETTO = true
 
 f:SetScript("OnShow", function()
   local name = UnitName("mouseover")
@@ -47,6 +56,8 @@ f:RegisterEvent("CHAT_MSG_CHANNEL") -- world channels
 f:RegisterEvent("PARTY_INVITE_REQUEST") -- decline invitations
 f:RegisterEvent("CHAT_MSG_SYSTEM")
 f:SetScript("OnEvent", function()
+  if not enabled then return end
+
   text = arg1
   name = arg2
 

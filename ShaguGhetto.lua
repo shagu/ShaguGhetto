@@ -82,6 +82,9 @@ f:SetScript("OnEvent", function()
   text = string.gsub(string.lower(text), "ghettoman", "")
   text = string.gsub(string.lower(text), "ghetto man", "")
 
+  -- ignore people asking what a "ghetto" is
+  if string.find(string.lower(text), "what") then return end
+
   -- make sure to leave party if theres no more space left
   if GetNumPartyMembers() > 3 then
     SendChatMessage("There are too many people in this group. Cu :)", "PARTY")

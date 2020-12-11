@@ -95,6 +95,9 @@ f:SetScript("OnEvent", function()
     if string.find(string.lower(text), keyword) then return end
   end
 
+  -- ignore too long sentences
+  if string.len(text) >= 20 then return end
+
   -- make sure to leave party if theres no more space left
   if GetNumPartyMembers() > 3 then
     SendChatMessage("There are too many people in this group. Cu :)", "PARTY")

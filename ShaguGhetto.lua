@@ -2,6 +2,14 @@ local name, text
 local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
 local enabled = true
+local ignores = {
+  ["what"] = true,
+  ["why"] = true,
+  ["the"] = true,
+  ["bot"] = true,
+  ["addon"] = true,
+  ["macro"] = true,
+}
 
 SLASH_GHETTO1 = "/ghetto"
 function SlashCmdList.GHETTO(msg, editbox)
@@ -82,8 +90,10 @@ f:SetScript("OnEvent", function()
   text = string.gsub(string.lower(text), "ghettoman", "")
   text = string.gsub(string.lower(text), "ghetto man", "")
 
-  -- ignore people asking what a "ghetto" is
-  if string.find(string.lower(text), "what") then return end
+  -- skip messages with certain keywords
+  for keyword in pairs(ignores) do
+    if string.find(string.lower(text), keyword) then return end
+  end
 
   -- make sure to leave party if theres no more space left
   if GetNumPartyMembers() > 3 then

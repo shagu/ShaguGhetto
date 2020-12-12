@@ -30,6 +30,12 @@ end)
 f.SendInvite = function(self, name)
   if not name then return end
 
+  -- make sure to leave party if theres no more space left
+  if GetNumPartyMembers() > 3 then
+    SendChatMessage("There are too many people in this group. Cu :)", "PARTY")
+    LeaveParty()
+  end
+
   -- invite player
   InviteUnit(name)
 
@@ -104,12 +110,6 @@ f:SetScript("OnEvent", function()
 
   -- ignore too long sentences
   if string.len(text) >= 20 then return end
-
-  -- make sure to leave party if theres no more space left
-  if GetNumPartyMembers() > 3 then
-    SendChatMessage("There are too many people in this group. Cu :)", "PARTY")
-    LeaveParty()
-  end
 
   -- invite people when ghetto is found
   if text and name and name ~= player and string.find(string.lower(text), "ghetto") then

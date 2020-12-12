@@ -64,6 +64,13 @@ f:RegisterEvent("CHAT_MSG_CHANNEL") -- world channels
 f:RegisterEvent("PARTY_INVITE_REQUEST") -- decline invitations
 f:RegisterEvent("CHAT_MSG_SYSTEM")
 f:SetScript("OnEvent", function()
+  -- skip events while not being party lead
+  if not UnitIsPartyLeader("player") and
+    ( GetNumPartyMembers() > 0  or UnitInRaid("player") )
+  then
+    return
+  end
+
   if not enabled then return end
 
   text = arg1

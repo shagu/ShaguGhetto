@@ -3,12 +3,7 @@ local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
 local enabled = true
 local ignores = {
-  ["what"] = true,
-  ["why"] = true,
-  ["the"] = true,
-  ["bot"] = true,
-  ["addon"] = true,
-  ["macro"] = true,
+  "what", "why", "wtf", "the", "bot", "addon", "macro"
 }
 
 SLASH_GHETTO1 = "/ghetto"
@@ -104,7 +99,7 @@ f:SetScript("OnEvent", function()
   text = string.gsub(string.lower(text), "ghetto man", "")
 
   -- skip messages with certain keywords
-  for keyword in pairs(ignores) do
+  for _, keyword in pairs(ignores) do
     if string.find(string.lower(text), keyword) then return end
   end
 

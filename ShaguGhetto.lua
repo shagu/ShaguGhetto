@@ -1,4 +1,4 @@
-local name, text
+local name, text, worldname
 local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
 local enabled = true
@@ -105,6 +105,13 @@ f:SetScript("OnEvent", function()
 
   -- ignore too long sentences
   if string.len(text) >= 20 then return end
+
+  -- avoid to invite spammers
+  if event == "CHAT_MSG_CHANNEL" and worldname == name then
+    return
+  end
+
+  worldname = name
 
   -- invite people when ghetto is found
   if text and name and name ~= player and string.find(string.lower(text), "ghetto") then

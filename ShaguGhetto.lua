@@ -6,6 +6,13 @@ local ignores = {
   "what", "why", "wtf", "the", "bot", "addon", "macro", "test", "is"
 }
 
+local announce = {
+  ["Shagu"] = "Invite sent! Enjoy your port :)",
+  ["Ghettomann"] = player .. "!",
+}
+
+announcement = announce[player]
+
 SLASH_GHETTO1 = "/ghetto"
 function SlashCmdList.GHETTO(msg, editbox)
   DEFAULT_CHAT_FRAME:AddMessage("|cff33ffccShagu|cffffffffGhetto: " .. (enabled and "|cffffaaaaDisabled" or "|cffaaffaaEnabled"))
@@ -43,7 +50,10 @@ f.SendInvite = function(self, name)
     channel = channel or event == "CHAT_MSG_YELL" and "YELL"
     channel = channel or "SAY"
 
-    if player == "Ghettomann" then SendChatMessage(player .. "!", channel, nil, GetChannelName("World")) end
+    if announcement and channel ~= "SAY" then
+      SendChatMessage(announcement, channel, nil, GetChannelName("World"))
+    end
+
     self.lastcall = GetTime()
   end
 

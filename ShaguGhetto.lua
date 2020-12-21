@@ -1,4 +1,4 @@
-local name, text, worldname
+local name, text, worldname, autoresponse
 local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
 local enabled = nil
@@ -24,6 +24,8 @@ end)
 
 f.SendInvite = function(self, name)
   if not name then return end
+
+  autoresponse = GetTime()
 
   -- make sure to leave party if theres no more space left
   if GetNumPartyMembers() > 3 then
@@ -80,7 +82,7 @@ f:SetScript("OnEvent", function()
   -- handle bugged out groups
   if event == "CHAT_MSG_SYSTEM" then
     local _, _, name = string.find(arg1, string.gsub(ERR_ALREADY_IN_GROUP_S, "%%s", "(%%S+)"))
-    if name then
+    if name and autoresponse and autoresponse < GetTime() + 1 then
       SendChatMessage("It says: \"You're already in a group\". Please leave or relog (if bugged) and whisper \"ghetto\" when ready.", "WHISPER", nil, name)
     end
     return

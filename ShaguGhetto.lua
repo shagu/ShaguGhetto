@@ -3,7 +3,7 @@ local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
 local enabled = nil
 local ignores = {
-  "what", "why", "wtf", "the", "bot", "addon", "macro"
+  "what", "why", "wtf", "the", "bot", "addon", "macro", "test", "is"
 }
 
 SLASH_GHETTO1 = "/ghetto"

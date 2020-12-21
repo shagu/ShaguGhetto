@@ -35,7 +35,7 @@ f.SendInvite = function(self, name)
   autoresponse = GetTime()
 
   -- make sure to leave party if theres no more space left
-  if GetNumPartyMembers() > 3 then
+  if player == "Ghettomann" and GetNumPartyMembers() > 3 then
     SendChatMessage("There are too many people in this group. Cu :)", "PARTY")
     LeaveParty()
   end
@@ -99,7 +99,7 @@ f:SetScript("OnEvent", function()
   end
 
   -- decline invitation and throw invite back
-  if event == "PARTY_INVITE_REQUEST" then
+  if player == "Ghettomann" and event == "PARTY_INVITE_REQUEST" then
     DeclineGroup()
     StaticPopup_Hide("PARTY_INVITE")
     f:SendInvite(arg1)

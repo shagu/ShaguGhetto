@@ -1,7 +1,7 @@
 local name, text, worldname
 local player = UnitName("player")
 local f = CreateFrame("Frame", "ShaguGhetto", GameTooltip)
-local enabled = true
+local enabled = nil
 local ignores = {
   "what", "why", "wtf", "the", "bot", "addon", "macro"
 }
